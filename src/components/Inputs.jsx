@@ -21,7 +21,7 @@ export const Inputs = () => {
   };
 
   useEffect(() => {
-    possibleOptions.length > 0
+    possibleOptions?.length > 0
       ? setOptions(possibleOptions.map(option => (
         <Option option={option} setOptionsVisible={setOptionsVisible} setTypedCity={setTypedCity} key={option.id} />
       )))

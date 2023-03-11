@@ -16,7 +16,8 @@ export const getNamesAndCoords = createAsyncThunk('weatherStore/getNameAndCoords
 export const getWeatherForecast = createAsyncThunk('weatherStore/getWeatherForecast', async ({ latitude, longitude })=> {
   try {
     const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=auto&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,precipitation_probability,precipitation,rain&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,precipitation_hours,precipitation_probability_max,windspeed_10m_max,weathercode&current_weather=true`);
-    return res.json();
+    const data = await res.json();
+    return data;
   } catch(err){
     return err;
   }
