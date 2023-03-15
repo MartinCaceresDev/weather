@@ -5,6 +5,20 @@ import { getNamesAndCoords, setOptionsVisible } from '../store';
 import { Option } from '.';
 
 
+export const getOrderedOptions = (possibleOptions) => {
+  const uniqueCountryOptions = [];
+  const repeatedCountryOptions = [];
+  possibleOptions.forEach(option => {
+    let included = false;
+    for (const unique of uniqueCountryOptions) {
+      if (unique.country === option.country) included = true;
+    };
+    included ? repeatedCountryOptions.push(option) : uniqueCountryOptions.push(option);
+  });
+  return uniqueCountryOptions.concat(repeatedCountryOptions);
+};
+
+
 export const Inputs = () => {
   const dispatch = useDispatch();
   const inputRef = useRef();
@@ -13,16 +27,20 @@ export const Inputs = () => {
   const [typedCity, setTypedCity] = useState('');
   const [options, setOptions] = useState(null);
 
-  const onSearch = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     if (typedCity.length > 2) {
-      dispatch(getNamesAndCoords(typedCity));
+      dispatch(getNamesAndCoords(typedCity.trim()));
       dispatch(setOptionsVisible(true));
     }
   };
 
   useEffect(() => {
-    possibleOptions?.length > 0
-      ? setOptions(possibleOptions.map(option => (
+    // One city per country will appear first. 
+    const orderedOptions = getOrderedOptions(possibleOptions);
+
+    orderedOptions?.length > 0
+      ? setOptions(orderedOptions.map(option => (
         <Option option={option} setOptionsVisible={setOptionsVisible} setTypedCity={setTypedCity} key={option.id} />
       )))
       : setOptions(
@@ -35,25 +53,28 @@ export const Inputs = () => {
   })
 
   return (
-    <div className='relative flex flex-row px-2 justify-between sm:justify-center items-center my-6 w-full max-w-md mx-auto'>
-      <input
-        type='text'
-        className='w-5/6 sm:w-80 text-md sm:placeholder:text-md sm:text-xl h-10 placeholder:lowercase font-light p-2 focus:outline-none shadow-xl capitalize'
-        placeholder='Search for city...'
-        onChange={e => setTypedCity(e.target.value)}
-        value={typedCity}
-        ref={inputRef}
-      />
-      {(options && optionsVisible && !isPending)
-        && (
-          <div id='options' className='absolute top-10 left-0 sm:left-auto w-full sm:w-80 flex flex-col bg-slate-300 text-black p-2 sm:p-5 divide-y-2 divide-black/5'>
-            {options}
-          </div>
-        )
-      }
-      <div className='flex w-1/6 absolute -right-5 top-3'>
-        <SearchIcon onClick={onSearch} className='text-white cursor-pointer transition ease-out hover:scale-125' />
-      </div>
+    <div className='px-2 my-6 w-full max-w-md mx-auto'>
+      <form onSubmit={onSubmit} className='relative w-full flex flex-row justify-center items-center'>
+        <input
+          type='text'
+          className='w-11/12 sm:w-80 text-md sm:placeholder:text-md sm:text-lg h-12 placeholder:lowercase font-light p-2 focus:outline-none shadow-xl capitalize'
+          placeholder='Search for city...'
+          onChange={e => setTypedCity(e.target.value)}
+          value={typedCity}
+          ref={inputRef}
+        />
+        <div className='flex w-1/12 sm:w-14 sm:absolute ml-2 sm:ml-0 sm:-right-8 top-3'>
+          <SearchIcon onClick={onSubmit} className='text-white cursor-pointer transition ease-out hover:scale-125' />
+        </div>
+
+        {(options && optionsVisible && !isPending)
+          && (
+            <div id='options' className='max-h-96 overflow-y-auto absolute top-10 left-0 sm:left-auto w-full sm:w-80 flex flex-col bg-slate-300 text-black p-2 sm:p-5 divide-y-2 divide-black/5'>
+              {options}
+            </div>
+          )
+        }
+      </form>
     </div>
   )
 }

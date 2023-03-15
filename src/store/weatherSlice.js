@@ -5,8 +5,8 @@ import { defaultCities, nameAndCoordsBaseURL, numberOfCitiesToShow } from '../ut
 export const getNamesAndCoords = createAsyncThunk('weatherStore/getNameAndCoords', async (city) => {
   try {
     const res = await fetch(nameAndCoordsBaseURL.concat(`${city}${numberOfCitiesToShow}`));
-    const namesAndCoords = await res.json()
-    return namesAndCoords;
+    const namesAndCoords = await res.json();
+    return namesAndCoords.results;
   } catch(err){
     console.log(err);
     return { results:[] };
@@ -67,9 +67,9 @@ const weatherSlice = createSlice({
       .addCase(getNamesAndCoords.pending, (state)=>{
         state.isPending = true;
       })
-      .addCase(getNamesAndCoords.fulfilled, (state, { payload })=>{
+      .addCase(getNamesAndCoords.fulfilled, (state, { payload })=>{        
+        state.possibleOptions = payload;
         state.isPending = false;
-        state.possibleOptions = payload.results;
       })
       .addCase(getNamesAndCoords.rejected, (state)=>{
         console.log('error')
@@ -80,11 +80,11 @@ const weatherSlice = createSlice({
         state.isPending = true;
       })
       .addCase(getWeatherForecast.fulfilled, (state, { payload })=>{
-        state.isPending = false;
         state.daily = payload.daily;
         state.hourly = payload.hourly;
         state.currentWeather = payload.current_weather;
         state.utc_offset_seconds = payload.utc_offset_seconds;
+        state.isPending = false;
       })
       .addCase(getWeatherForecast.rejected, (state)=>{
         console.log('error');

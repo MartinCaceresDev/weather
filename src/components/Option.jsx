@@ -30,7 +30,7 @@ export const Option = ({ option, setOptionsVisible, setTypedCity }) => {
         {option.name},
       </span>
       <span className='text-xs'>
-        {' '}{option.admin1}, {option.country}
+        {' '}{option.admin1}, {option.country || option.country_code}
       </span>
     </article>
   )
