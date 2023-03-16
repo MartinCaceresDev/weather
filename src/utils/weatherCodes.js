@@ -1,8 +1,20 @@
 export const weatherCodes = {
-  0: {description: 'Clear sky', url: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F0-clear_sky.png?alt=media&token=f0bae714-4f98-4f8d-a958-6706a686fe95'},
-  1: {description: 'Mainly clear', url: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F1-mainly_clear.png?alt=media&token=ac3342c0-6803-43e6-a856-19dcc494792b'},
-  2: {description: 'Partly cloudy', url: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F2-partly_cloudy.png?alt=media&token=37e60942-5015-42bb-8a17-1914d9a98158'},
-  3: {description: 'Overcast', url: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F3-overcast.png?alt=media&token=0dda4afc-8780-4714-982d-f936e1aaddff'},
+  0: {
+    description: 'Clear sky', 
+    url: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F0-clear_sky.png?alt=media&token=f0bae714-4f98-4f8d-a958-6706a686fe95',
+    nightURL: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F0-clear_sky_night.png?alt=media&token=f2e99b1e-93ec-48e6-8ed5-c59d7a7fcb41'
+  },
+  1: {
+    description: 'Mainly clear', 
+    url: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F1-mainly_clear.png?alt=media&token=ac3342c0-6803-43e6-a856-19dcc494792b',
+    nightURL: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F1-mainly_clear_night.png?alt=media&token=f4d9dc7b-5caa-462c-a15a-62ae962afa73'
+  },
+  2: {
+    description: 'Partly cloudy', 
+    url: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F2-partly_cloudy.png?alt=media&token=37e60942-5015-42bb-8a17-1914d9a98158',
+    nightURL: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F2-partly_cloudy_night.png?alt=media&token=87a6c6cc-2448-4515-a7bd-255cdf3336f8'
+  },
+  3: {description: 'Overcast', url: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F3-overcast.png?alt=media&token=6ee5bf54-0617-43b9-8d29-ecf75a8c634a'},
   45: {description: 'Fog', url: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F45-fog.jpg?alt=media&token=caaf83bd-b9e6-4ef4-94a9-3e9d1d745288'},
   48: {description: 'Depositing rime fog', url: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F45-fog.jpg?alt=media&token=caaf83bd-b9e6-4ef4-94a9-3e9d1d745288'},
   51: {description: 'Drizzle: light intensity', url: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F61-rain_slight.png?alt=media&token=ef5e7375-0a96-4f1a-9c07-5c6582c38bd8'},

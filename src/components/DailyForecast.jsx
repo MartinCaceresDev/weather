@@ -23,6 +23,7 @@ export const DailyForecast = () => {
             <img
               src={weathercode.length > 4 ? (weatherCodes[weathercode[index]].url || weatherCodes[0].url) : weatherCodes[0].url}
               alt={weathercode.length > 4 ? weatherCodes[weathercode[index]].description : weatherCodes[0].description}
+              title={weathercode.length > 4 ? weatherCodes[weathercode[index]].description : weatherCodes[0].description}
               className='w-9 sm:w-12 my-1'
             />
             <p className='font-medium text-sm flex flex-col sm:flex-row items-center justify-center'>

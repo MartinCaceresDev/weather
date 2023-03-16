@@ -23,8 +23,10 @@ export const HourlyForecast = () => {
               {timeIndex} {timeIndex < 12 ? 'AM' : 'PM'}
             </p>
             <img
-              src={weathercode.length > 4 ? weatherCodes[weathercode[timeIndex]].url : weatherCodes[0].url}
+              // src={weathercode.length > 4 ? weatherCodes[weathercode[timeIndex]].url : weatherCodes[0].url}
+              src={timeIndex >= 19 && (weathercode[timeIndex] < 3) ? weatherCodes[weathercode[timeIndex]].nightURL : weatherCodes[weathercode[timeIndex]].url}
               alt={weathercode.length > 4 ? weatherCodes[weathercode[timeIndex]].description : weatherCodes[0].description}
+              title={weathercode.length > 4 ? weatherCodes[weathercode[timeIndex]].description : weatherCodes[0].description}
               className='w-9 sm:w-12 my-1'
             />
             <p className='font-medium text-sm'>{temperature_2m[timeIndex]}°</p>

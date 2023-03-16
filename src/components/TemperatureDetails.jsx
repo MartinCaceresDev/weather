@@ -30,7 +30,8 @@ export const TemperatureDetails = () => {
       <div className='flex flex-row items-center justify-between sm:justify-center text-white py-3 mb-3 px-2'>
         <div className='flex flex-col items-center justify-between sm:justify-end sm:flex-row w-1/3 sm:w-1/2'>
           <img
-            src={weatherCodes[`${weathercode}`].url || defaultURL}
+            // src={weatherCodes[`${weathercode}`].url || defaultURL}
+            src={((Number(new Date(localeTime).getHours()) >= 19 || Number(new Date(localeTime).getHours()) < 6)) && (weathercode < 3) ? weatherCodes[`${weathercode}`].nightURL : weatherCodes[`${weathercode}`].url}
             alt={weatherCodes[`${weathercode}`].description}
             className='sm:w-20 w-14'
           />
@@ -54,7 +55,7 @@ export const TemperatureDetails = () => {
       </div>
 
 
-      <div className='grid grid-cols-2 gap-y-3 justify-items-center grid-rows-2 sm:flex sm:flex-row items-center justify-between lg:justify-center space-x-2 lg:space-x-4 text-white text-sm py-3'>
+      <div className='grid grid-cols-2 grid-flow-col gap-y-3 justify-items-center grid-rows-2 sm:flex sm:flex-row items-center justify-between lg:justify-center space-x-2 lg:space-x-4 text-white text-sm py-3'>
 
         <div className='flex flex-col sm:flex-row items-center justify-center'>
           <LightModeIcon />

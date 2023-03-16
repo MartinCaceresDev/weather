@@ -54,7 +54,7 @@ export const Inputs = () => {
 
   return (
     <div className='px-2 my-6 w-full max-w-md mx-auto'>
-      <form onSubmit={onSubmit} className='relative w-full flex flex-row justify-center items-center'>
+      <form onSubmit={onSubmit} className='relative w-full flex flex-row justify-center items-center text-2xl'>
         <input
           type='text'
           className='w-11/12 sm:w-80 text-md sm:placeholder:text-md sm:text-lg h-12 placeholder:lowercase font-light p-2 focus:outline-none shadow-xl capitalize'
@@ -63,7 +63,7 @@ export const Inputs = () => {
           value={typedCity}
           ref={inputRef}
         />
-        <div className='flex w-1/12 sm:w-14 sm:absolute ml-2 sm:ml-0 sm:-right-8 top-3'>
+        <div className='flex items-center justify-center h-12 w-1/12 sm:w-12 sm:absolute ml-2 sm:ml-0 sm:-right-2 top-0'>
           <SearchIcon onClick={onSubmit} className='text-white cursor-pointer transition ease-out hover:scale-125' />
         </div>
 
