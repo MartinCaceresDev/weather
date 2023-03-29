@@ -8,7 +8,7 @@ import { defaultCities, localeTimePayload } from "./utils";
 const getCitiesFromLocalStorage = () => JSON.parse(localStorage.getItem('lastLocations'));
 
 
-const App = () => {
+export default function App() {
   const dispatch = useDispatch();
   const { lastLocations, utc_offset_seconds, optionsVisible } = useSelector(weatherSelector);
 
@@ -42,7 +42,3 @@ const App = () => {
     </div>
   );
 };
-
-export default App;
-
-

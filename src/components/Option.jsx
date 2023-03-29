@@ -26,7 +26,7 @@ export const Option = ({ option, setOptionsVisible, setTypedCity }) => {
       onClick={() => onOptionSelection(option)}
       className='cursor-pointer py-3'
     >
-      <span className='font-semibold text-sky-900'>
+      <span className='font-semibold text-sky-900 text-lg'>
         {option.name},
       </span>
       <span className='text-xs'>

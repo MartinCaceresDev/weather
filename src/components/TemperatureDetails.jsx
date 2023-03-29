@@ -12,8 +12,6 @@ import { weatherCodes } from '../utils';
 import { currentWeatherSelector, dailyDataSelector, hourlyDataSelector, weatherSelector } from '../store/weatherSlice';
 
 
-const defaultURL = 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F0-clear_sky.png?alt=media&token=f0bae714-4f98-4f8d-a958-6706a686fe95';
-
 export const TemperatureDetails = () => {
 
   const { temperature = 0, weathercode = 0, windspeed = 0 } = useSelector(currentWeatherSelector);
@@ -30,8 +28,10 @@ export const TemperatureDetails = () => {
       <div className='flex flex-row items-center justify-between sm:justify-center text-white py-3 mb-3 px-2'>
         <div className='flex flex-col items-center justify-between sm:justify-end sm:flex-row w-1/3 sm:w-1/2'>
           <img
-            // src={weatherCodes[`${weathercode}`].url || defaultURL}
-            src={((Number(new Date(localeTime).getHours()) >= 19 || Number(new Date(localeTime).getHours()) < 6)) && (weathercode < 3) ? weatherCodes[`${weathercode}`].nightURL : weatherCodes[`${weathercode}`].url}
+            src={((Number(new Date(localeTime).getHours()) >= 19 || Number(new Date(localeTime).getHours()) < 6))
+              && (weathercode < 3)
+              ? weatherCodes[`${weathercode}`].nightURL
+              : weatherCodes[`${weathercode}`].url}
             alt={weatherCodes[`${weathercode}`].description}
             className='sm:w-20 w-14'
           />
@@ -59,13 +59,13 @@ export const TemperatureDetails = () => {
 
         <div className='flex flex-col sm:flex-row items-center justify-center'>
           <LightModeIcon />
-          <p className='font-light'>Rise:
+          <p className='font-light'>&nbsp;Rise:
             <span className='font-medium ml-1'>{sunrise[0].slice(-5).concat(' AM')}</span>
           </p>
         </div>
         <div className='flex flex-col sm:flex-row items-center justify-center'>
           <NightlightIcon />
-          <p className='font-light'>Set:
+          <p className='font-light'>&nbsp;Set:
             <span className='font-medium ml-1'>{sunset[0].slice(-5).concat(' PM')}</span>
           </p>
         </div>

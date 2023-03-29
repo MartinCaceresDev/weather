@@ -3,20 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search';
 import { getNamesAndCoords, setOptionsVisible } from '../store';
 import { Option } from '.';
-
-
-export const getOrderedOptions = (possibleOptions) => {
-  const uniqueCountryOptions = [];
-  const repeatedCountryOptions = [];
-  possibleOptions.forEach(option => {
-    let included = false;
-    for (const unique of uniqueCountryOptions) {
-      if (unique.country === option.country) included = true;
-    };
-    included ? repeatedCountryOptions.push(option) : uniqueCountryOptions.push(option);
-  });
-  return uniqueCountryOptions.concat(repeatedCountryOptions);
-};
+import { getOrderedOptions } from '../utils';
 
 
 export const Inputs = () => {
@@ -37,16 +24,16 @@ export const Inputs = () => {
 
   useEffect(() => {
     // One city per country will appear first. 
-    const orderedOptions = getOrderedOptions(possibleOptions);
+    const orderedOptions = possibleOptions?.length ? getOrderedOptions(possibleOptions) : [];
 
     orderedOptions?.length > 0
       ? setOptions(orderedOptions.map(option => (
         <Option option={option} setOptionsVisible={setOptionsVisible} setTypedCity={setTypedCity} key={option.id} />
       )))
       : setOptions(
-        <article className='text-red-500 font-semibold text-center'>No encontramos una ciudad con ese nombre.</article>
+        <article className='text-red-500 text-lg font-semibold text-center'>Cannot find city: {typedCity}.</article>
       );
-  }, [possibleOptions]);
+  }, [possibleOptions, typedCity]);
 
   useEffect(() => {
     !typedCity && inputRef.current.focus();
