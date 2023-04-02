@@ -10,12 +10,12 @@ export const DailyForecast = () => {
   return (
     <div className='p-2 sm:p-4 lg:px-16'>
       <div className='flex items-center justify-start my-2'>
-        <p className='text-white font-medium uppercase'>Daily forecast:</p>
+        <p className='text-white font-medium uppercase'>Next days:</p>
       </div>
       <hr className='my-2' />
       <div className='flex flex-row items-center justify-between text-white'>
 
-        {times.length > 4 && times.slice(1, 6).map((time, index) => (
+        {times.length > 4 && times.slice(2, 7).map((time, index) => (
           <div className='flex flex-col items-center justify-center' key={time}>
             <p className='font-light text-sm'>
               {new Date(time).toUTCString().slice(0, 3)}
@@ -28,10 +28,10 @@ export const DailyForecast = () => {
             />
             <p className='font-medium text-sm flex flex-col sm:flex-row items-center justify-center'>
               <span className='sm:hidden text-xs font-light'>min</span>
-              <span>{temperature_2m_min[index + 1]}°</span>
+              <span>{temperature_2m_min[index + 2]}°</span>
               <span className='hidden sm:inline'>/</span>
               <span className='sm:hidden text-xs font-light mt-2'>max</span>
-              <span>{temperature_2m_max[index + 1]}°</span>
+              <span>{temperature_2m_max[index + 2]}°</span>
             </p>
           </div>
         ))}

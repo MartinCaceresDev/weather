@@ -54,7 +54,6 @@ export const TemperatureDetails = () => {
         </div>
       </div>
 
-
       <div className='grid grid-cols-2 grid-flow-col gap-y-3 justify-items-center grid-rows-2 sm:flex sm:flex-row items-center justify-between lg:justify-center space-x-2 lg:space-x-4 text-white text-sm py-3'>
 
         <div className='flex flex-col sm:flex-row items-center justify-center'>
@@ -71,13 +70,13 @@ export const TemperatureDetails = () => {
         </div>
         <div className='flex flex-col sm:flex-row items-center justify-center'>
           <ArrowUpwardIcon />
-          <p className='font-light'>High:
+          <p className='font-light'>Max:
             <span className='font-medium ml-1'>{temperature_2m_max[0]}°</span>
           </p>
         </div>
         <div className='flex flex-col sm:flex-row items-center justify-center'>
           <ArrowDownwardIcon />
-          <p className='font-light'>Low:
+          <p className='font-light'>Min:
             <span className='font-medium ml-1'>{temperature_2m_min[0]}°</span>
           </p>
         </div>

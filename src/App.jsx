@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { DailyForecast, HourlyForecast, Inputs, TemperatureDetails, TimeAndLocation, TopButtons } from "./components"
+import { DailyForecast, HourlyForecast, Inputs, TemperatureDetails, TimeAndLocation, TomorrowForecast, TopButtons } from "./components"
 import { getWeatherForecast, setLocaleTime, setLocations, setOptionsVisible, weatherSelector } from "./store";
 import { defaultCities, localeTimePayload } from "./utils";
 
@@ -38,6 +38,7 @@ export default function App() {
       <TimeAndLocation />
       <TemperatureDetails />
       <HourlyForecast />
+      <TomorrowForecast />
       <DailyForecast />
     </div>
   );
