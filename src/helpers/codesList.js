@@ -1,4 +1,4 @@
-export const weatherCodes = {
+export const codesList = {
   0: {
     description: 'Clear sky', 
     url: 'https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/weather-app%2F0-clear_sky.png?alt=media&token=f0bae714-4f98-4f8d-a958-6706a686fe95',

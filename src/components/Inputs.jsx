@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search';
-import { getNamesAndCoords, setOptionsVisible } from '../store';
+import { getCitiesOptions, setOptionsVisible } from '../store';
 import { Option } from '.';
-import { getOrderedOptions } from '../utils';
+import { getOrderedOptions } from '../helpers';
 
 
 export const Inputs = () => {
@@ -17,7 +17,7 @@ export const Inputs = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (typedCity.length > 2) {
-      dispatch(getNamesAndCoords(typedCity.trim()));
+      dispatch(getCitiesOptions(typedCity.trim()));
       dispatch(setOptionsVisible(true));
     }
   };
@@ -26,6 +26,7 @@ export const Inputs = () => {
     // One city per country will appear first. 
     const orderedOptions = possibleOptions?.length ? getOrderedOptions(possibleOptions) : [];
 
+    // Display options
     orderedOptions?.length > 0
       ? setOptions(orderedOptions.map(option => (
         <Option option={option} setOptionsVisible={setOptionsVisible} setTypedCity={setTypedCity} key={option.id} />

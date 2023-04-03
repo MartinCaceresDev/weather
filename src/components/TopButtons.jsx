@@ -1,21 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getWeatherForecast, setLocations, weatherSelector } from "../store";
-import { saveLocationsInLocalStorage } from "../utils";
+import { getChosenCityForecast, setLocations, selectWeatherState } from "../store";
+import { saveLocationsInLocalStorage } from "../helpers";
 
 
 export const TopButtons = () => {
   const dispatch = useDispatch();
-  const { lastLocations } = useSelector(weatherSelector);
+  const { lastLocations } = useSelector(selectWeatherState);
 
   const handleLocation = ({ name, country, latitude, longitude, id, utc_offset_seconds }) => {
+    // update last locations in state and local storage
     let lastLocationsCopy = lastLocations.concat();
     lastLocationsCopy = lastLocationsCopy.filter(location => location.id !== id);
     lastLocationsCopy.unshift({ name, country, latitude, longitude, id, utc_offset_seconds });
     lastLocationsCopy.length > 6 && lastLocationsCopy.pop();
-
     dispatch(setLocations(lastLocationsCopy));
-    dispatch(getWeatherForecast({ latitude, longitude }));
     saveLocationsInLocalStorage(lastLocationsCopy);
+
+    // query data from chosen city
+    dispatch(getChosenCityForecast({ latitude, longitude }));
   }
 
   return (

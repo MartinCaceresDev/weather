@@ -1,3 +1,10 @@
+
+/**
+ * 
+ * @param {Array} possibleOptions - Array of possible cities to choose from.
+ * @returns {Array} Array ordered by one city per country first.
+ */
+
 export const getOrderedOptions = (possibleOptions) => {
   const uniqueCountryOptions = [];
   const repeatedCountryOptions = [];

@@ -8,36 +8,40 @@ import NightlightIcon from '@mui/icons-material/Nightlight';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
-import { weatherCodes } from '../utils';
-import { currentWeatherSelector, dailyDataSelector, hourlyDataSelector, weatherSelector } from '../store/weatherSlice';
+import { codesList } from '../helpers';
+import { selectCurrentWeather, selectDailyData, selectHourlyData, selectWeatherState } from '../store/weatherSlice';
 
 
 export const TemperatureDetails = () => {
 
-  const { temperature = 0, weathercode = 0, windspeed = 0 } = useSelector(currentWeatherSelector);
-  const { sunrise, sunset, temperature_2m_max, temperature_2m_min } = useSelector(dailyDataSelector);
-  const { apparent_temperature, relativehumidity_2m } = useSelector(hourlyDataSelector);
-  const { localeTime } = useSelector(weatherSelector);
+  const { temperature = 0, weathercode = 0, windspeed = 0 } = useSelector(selectCurrentWeather);
+  const { sunrise, sunset, temperature_2m_max, temperature_2m_min } = useSelector(selectDailyData);
+  const { apparent_temperature, relativehumidity_2m } = useSelector(selectHourlyData);
+  const { localeTime } = useSelector(selectWeatherState);
 
   return (
     <>
+      {/* Present weather description */}
       <div className='flex items-center justify-center py-6 text-xl text-cyan-300'>
-        {!isNaN(weathercode) && <p>{weatherCodes[`${weathercode}`].description}</p>}
+        {!isNaN(weathercode) && <p>{codesList[`${weathercode}`].description}</p>}
       </div>
 
       <div className='flex flex-row items-center justify-between sm:justify-center text-white py-3 mb-3 px-2'>
+
+        {/* Present weather image and temperature */}
         <div className='flex flex-col items-center justify-between sm:justify-end sm:flex-row w-1/3 sm:w-1/2'>
           <img
             src={((Number(new Date(localeTime).getHours()) >= 19 || Number(new Date(localeTime).getHours()) < 6))
               && (weathercode < 3)
-              ? weatherCodes[`${weathercode}`].nightURL
-              : weatherCodes[`${weathercode}`].url}
-            alt={weatherCodes[`${weathercode}`].description}
+              ? codesList[`${weathercode}`].nightURL
+              : codesList[`${weathercode}`].url}
+            alt={codesList[`${weathercode}`].description}
             className='sm:w-20 w-14'
           />
           <p className='text-2xl sm:text-5xl sm:ml-8 sm:mr-20'>{temperature}°</p>
         </div>
 
+        {/* Real fell, Humidity, Wind */}
         <div className='flex flex-col space-y-2 items-center w-2/3 sm:w-1/2'>
           <div className='flex font-light text-sm items-center justify-center'>
             <DeviceThermostatIcon className='mr-1' />
@@ -54,6 +58,7 @@ export const TemperatureDetails = () => {
         </div>
       </div>
 
+      {/* Rise, Set, Max, Min */}
       <div className='grid grid-cols-2 grid-flow-col gap-y-3 justify-items-center grid-rows-2 sm:flex sm:flex-row items-center justify-between lg:justify-center space-x-2 lg:space-x-4 text-white text-sm py-3'>
 
         <div className='flex flex-col sm:flex-row items-center justify-center'>

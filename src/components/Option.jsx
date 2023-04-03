@@ -1,24 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getWeatherForecast, setLocations, weatherSelector } from "../store";
-import { saveLocationsInLocalStorage } from "../utils";
+import { getChosenCityForecast, setLocations, selectWeatherState } from "../store";
+import { saveLocationsInLocalStorage } from "../helpers";
 
 export const Option = ({ option, setOptionsVisible, setTypedCity }) => {
 
   const dispatch = useDispatch();
-  const { lastLocations } = useSelector(weatherSelector);
+  const { lastLocations } = useSelector(selectWeatherState);
 
   const onOptionSelection = ({ name, country, latitude, longitude, id, utc_offset_seconds }) => {
     setOptionsVisible(false);
     setTypedCity('');
 
+    // update last locations in state and local storage
     let lastLocationsCopy = lastLocations.concat();
     lastLocationsCopy = lastLocationsCopy.filter(location => location.id !== id);
     lastLocationsCopy.unshift({ name, country, latitude, longitude, id, utc_offset_seconds });
     lastLocationsCopy.length > 6 && lastLocationsCopy.pop();
-
     dispatch(setLocations(lastLocationsCopy));
     saveLocationsInLocalStorage(lastLocationsCopy);
-    dispatch(getWeatherForecast({ latitude, longitude }));
+
+    // query data of chosen city
+    dispatch(getChosenCityForecast({ latitude, longitude }));
   };
 
   return (
